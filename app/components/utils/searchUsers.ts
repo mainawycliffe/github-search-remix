@@ -20,11 +20,23 @@ function isError(obj: any): obj is Error {
  */
 export default async function searchUsers(query: string, page = 1) {
   const searchUrl = `${API_ENDPOINT}/search/users?q=${query}&page=${page}&per_page=10`;
-  const res = await fetch(searchUrl);
+  const res = await fetch(searchUrl, {
+    ...(process.env.GITHUB_PAT && {
+      headers: {
+        Authorization: 'Basic ' + process.env.GITHUB_PAT,
+      },
+    }),
+  });
   const body = (await res.json()) as GitHubSearchResult;
   const searchResultsWithUser = await Promise.all(
     body.items.map(async (item) => {
-      const res = await fetch(`https://api.github.com/users/${item.login}`);
+      const res = await fetch(`https://api.github.com/users/${item.login}`, {
+        ...(process.env.GITHUB_PAT && {
+          headers: {
+            Authorization: 'Basic ' + process.env.GITHUB_PAT,
+          },
+        }),
+      });
       const getUserResponse = (await res.json()) as GitHubUser | Error;
       if (isError(getUserResponse)) {
         const error = getUserResponse as Error;
