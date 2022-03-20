@@ -26,7 +26,6 @@ export default async function searchUsers(query: string, page = 1) {
     body.items.map(async (item) => {
       const res = await fetch(`https://api.github.com/users/${item.login}`);
       const getUserResponse = (await res.json()) as GitHubUser | Error;
-      console.log(getUserResponse);
       if (isError(getUserResponse)) {
         const error = getUserResponse as Error;
         throw json(error.message, { status: 503 });
