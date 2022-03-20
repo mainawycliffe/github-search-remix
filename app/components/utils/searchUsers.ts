@@ -1,6 +1,16 @@
+import { json } from 'remix';
 import { GitHubSearchResult, GitHubSearchResultItem, GitHubUser } from '../SearchResults';
 
 export const API_ENDPOINT = `https://api.github.com`;
+
+type Error = {
+  message: string;
+  documentation_url: string;
+};
+
+function isError(obj: any): obj is Error {
+  return obj && typeof obj === 'object' && 'message' in obj && 'documentation_url' in obj;
+}
 
 /**
  *
@@ -15,19 +25,24 @@ export default async function searchUsers(query: string, page = 1) {
   const searchResultsWithUser = await Promise.all(
     body.items.map(async (item) => {
       const res = await fetch(`https://api.github.com/users/${item.login}`);
-      const user = (await res.json()) as GitHubUser;
+      const getUserResponse = (await res.json()) as GitHubUser | Error;
+      console.log(getUserResponse);
+      if (isError(getUserResponse)) {
+        const error = getUserResponse as Error;
+        throw json(error.message, { status: 503 });
+      }
       return {
         user: {
-          avatar_url: user.avatar_url,
-          bio: user.bio,
-          followers: user.followers,
-          following: user.following,
-          html_url: user.html_url,
-          id: user.id,
-          login: user.login,
-          location: user.location,
-          name: user.name,
-          type: user.type,
+          avatar_url: getUserResponse.avatar_url,
+          bio: getUserResponse.bio,
+          followers: getUserResponse.followers,
+          following: getUserResponse.following,
+          html_url: getUserResponse.html_url,
+          id: getUserResponse.id,
+          login: getUserResponse.login,
+          location: getUserResponse.location,
+          name: getUserResponse.name,
+          type: getUserResponse.type,
         },
         html_url: item.html_url,
         id: item.id,
@@ -38,8 +53,8 @@ export default async function searchUsers(query: string, page = 1) {
   );
 
   return {
-    totalCount: body.total_count,
-    incompleteResults: body.incomplete_results,
+    total_count: body.total_count,
+    incomplete_results: body.incomplete_results,
     items: searchResultsWithUser,
   };
 }
