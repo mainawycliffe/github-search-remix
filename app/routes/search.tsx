@@ -40,7 +40,7 @@ export default function Search() {
       <div className='flex flex-col h-screen w-screen bg-gray-300 p-5 overflow-y-auto'>
         <div className='flex flex-col w-2/3 mx-auto space-y-4 '>
           <div className='flex flex-col py-4'>
-            <SearchForm />
+            <SearchForm searchTerm={searchTerm} />
           </div>
           <div className='flex flex-row py-4 text-2xl space-x-2'>
             <span className='font-semibold'>Total results:</span> <span>{results.total_count}</span>
