@@ -1,8 +1,6 @@
-import { Form } from 'remix';
-
 export default function SearchForm() {
   return (
-    <Form method='get' action='/search' className='space-y-4'>
+    <form method='get' action='/search' className='space-y-4'>
       <label className='font-bold text-2xl' htmlFor='search'>
         Search on Github
       </label>
@@ -17,6 +15,6 @@ export default function SearchForm() {
       <button type='submit' className='text-xl px-4 py-2 text-white bg-blue-500 rounded-lg font-bold'>
         Search
       </button>
-    </Form>
+    </form>
   );
 }
