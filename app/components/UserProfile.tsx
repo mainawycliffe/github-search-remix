@@ -27,7 +27,7 @@ export default function UserProfile({ item }: Props) {
           </h4>
           {item.user.bio && <div className='text-xl'>{item.user.bio}</div>}
           {item.user.location && <div className='text-lg font-semibold text-gray-500'>{item.user.location}</div>}
-          <div className='text-xl space-x-4 flex flex-row text-center'>
+          <div className='text-xl space-y-2 md:space-y-0 md:space-x-4 flex flex-col  md:flex-row text-center'>
             <div className='flex flex-row space-x-2'>
               <div className='font-bold'>Followers:</div>
               <div>{item.user.followers}</div>
@@ -36,9 +36,9 @@ export default function UserProfile({ item }: Props) {
               <div className='font-bold'>Following:</div>
               <div>{item.user.following}</div>
             </div>
-            <div className='flex flex-row px-4 py-1'>
-              <a target='_blank' href={item.user.html_url} rel='noreferrer'>
-                <FaGithub />
+            <div className='flex flex-row '>
+              <a className='block' target='_blank' href={item.user.html_url} rel='noreferrer'>
+                <FaGithub className='inline-block' /> <span className='inline-block'> GitHub Profile</span>
               </a>
             </div>
           </div>

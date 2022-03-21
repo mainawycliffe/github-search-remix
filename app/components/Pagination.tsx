@@ -16,7 +16,7 @@ type Props = {
 export default function Pagination({ page, searchTerm, totalNumberOfPages }: Props) {
   return (
     <>
-      <div className='flex flex-row py-4 text-2xl space-x-2'>
+      <div className='flex flex-col md:flex-row py-4 text-2xl space-x-2'>
         <div className='flex flex-row flex-1'>
           Showing pages {page} of {totalNumberOfPages}
         </div>

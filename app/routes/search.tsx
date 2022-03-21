@@ -43,7 +43,7 @@ export default function Search() {
   return (
     <>
       <div className='flex flex-col h-screen w-screen bg-gray-300 p-5 overflow-y-auto'>
-        <div className='flex flex-col w-[50rem] mx-auto space-y-4 '>
+        <div className='flex flex-col max-w-full w-[50rem] mx-auto space-y-4 '>
           <div className='flex flex-col py-4'>
             <SearchForm searchTerm={searchTerm} />
           </div>

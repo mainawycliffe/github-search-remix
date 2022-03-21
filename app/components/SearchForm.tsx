@@ -12,7 +12,7 @@ type Props = {
 export default function SearchForm({ searchTerm }: Props) {
   const transition = useTransition();
 
-  const isBusy = transition.state === 'submitting';
+  const isLoading = transition.state === 'submitting';
 
   return (
     <Form method='get' action='/search' className='space-y-4'>
@@ -28,8 +28,11 @@ export default function SearchForm({ searchTerm }: Props) {
         placeholder='Search'
         defaultValue={searchTerm}
       />
-      <button disabled={isBusy} type='submit' className='text-xl px-4 py-2 text-white bg-blue-500 rounded-lg font-bold'>
-        {isBusy ? 'Loading...' : 'Search'}
+      <button
+        disabled={isLoading}
+        type='submit'
+        className='text-xl px-4 py-2 text-white bg-blue-500 rounded-lg font-bold w-full sm:w-auto'>
+        {isLoading ? 'Loading...' : 'Search'}
       </button>
     </Form>
   );
