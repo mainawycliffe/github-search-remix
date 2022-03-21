@@ -8,6 +8,11 @@ type Error = {
   documentation_url: string;
 };
 
+/**
+ *
+ * A custom type guard to check if the returned object is an error
+ *
+ */
 function isError(obj: any): obj is Error {
   return obj && typeof obj === 'object' && 'message' in obj && 'documentation_url' in obj;
 }

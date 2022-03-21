@@ -7,6 +7,12 @@ type Props = {
   totalNumberOfPages: number;
 };
 
+/**
+ *
+ * Show pages for Github search results
+ *
+ */
+
 export default function Pagination({ page, searchTerm, totalNumberOfPages }: Props) {
   return (
     <>

@@ -5,6 +5,11 @@ type Props = {
   item: GitHubSearchResultItem;
 };
 
+/**
+ *
+ * A component for displaying a single user profile from Github Search Results
+ *
+ */
 export default function UserProfile({ item }: Props) {
   return (
     <>

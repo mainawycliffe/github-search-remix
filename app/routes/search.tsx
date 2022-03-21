@@ -29,6 +29,11 @@ type LoaderDataType = {
   results: GitHubSearchResult;
 };
 
+/**
+ *
+ * Page for searching and displaying search results of GitHub users
+ *
+ */
 export default function Search() {
   const { results, page, searchTerm } = useLoaderData<LoaderDataType>();
 

@@ -4,6 +4,11 @@ type Props = {
   searchTerm?: string;
 };
 
+/**
+ *
+ * Form for searching GitHub users
+ *
+ */
 export default function SearchForm({ searchTerm }: Props) {
   const transition = useTransition();
 
